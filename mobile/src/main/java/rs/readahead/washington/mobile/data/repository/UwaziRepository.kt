@@ -6,10 +6,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import rs.readahead.washington.mobile.data.ParamsNetwork
-import rs.readahead.washington.mobile.data.entity.uwazi.LanguageEntity
-import rs.readahead.washington.mobile.data.entity.uwazi.LoginEntity
-import rs.readahead.washington.mobile.data.entity.uwazi.LoginResult
-import rs.readahead.washington.mobile.data.entity.uwazi.UwaziEntityRow
+import rs.readahead.washington.mobile.data.entity.uwazi.*
 import rs.readahead.washington.mobile.data.entity.uwazi.mapper.mapToDomainModel
 import rs.readahead.washington.mobile.data.uwazi.UwaziService
 import rs.readahead.washington.mobile.domain.entity.UWaziUploadServer
@@ -217,7 +214,8 @@ class UwaziRepository : IUwaziUserRepository {
     override fun submitEntity(
         server: UWaziUploadServer,
         entity: RequestBody,
-        attachments: List<MultipartBody.Part?>
+        attachments: List<MultipartBody.Part?>,
+        primaryDocuments : List<MultipartBody.Part?>?
     ): Single<UwaziEntityRow> {
         return uwaziApi.submitEntity(
             attachments = attachments,
@@ -231,7 +229,12 @@ class UwaziRepository : IUwaziUserRepository {
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess {  }
+            .doOnSuccess { entity ->
+                primaryDocuments?.forEach {
+                    submitPrimaryDocument(server,entity.)
+                }
+
+            }
     }
 
     override fun submitWhiteListedEntity(
@@ -246,6 +249,25 @@ class UwaziRepository : IUwaziUserRepository {
                 '/',
                 server.url,
                 ParamsNetwork.URL_WHITE_LISTED_ENTITIES
+            ),
+            cookies = arrayListOf(server.connectCookie, server.localeCookie),
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun submitPrimaryDocument(
+        server: UWaziUploadServer,
+        entity: RequestBody,
+        attachments: MultipartBody.Part
+    ): Single<PrimaryDocumentResponse> {
+        return uwaziApi.submitPrimaryDocument(
+            attachment = attachments,
+            entity = entity,
+            url = StringUtils.append(
+                '/',
+                server.url,
+                ParamsNetwork.URL_PRIMARY_DOCUMENTS
             ),
             cookies = arrayListOf(server.connectCookie, server.localeCookie),
         )

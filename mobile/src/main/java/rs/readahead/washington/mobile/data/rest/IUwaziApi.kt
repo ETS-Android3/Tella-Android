@@ -64,5 +64,15 @@ interface IUwaziApi  {
         @Header(COOKIE) cookies : List<String>,
         @Header(X_REQUESTED_WITH) requested: String = "XMLHttpRequest"
     ) : Single<UwaziEntityRow>
+
+    @Multipart
+    @POST
+    fun submitPrimaryDocument(
+        @Part attachment : MultipartBody.Part?,
+        @Part("entity") entity: RequestBody,
+        @Url url: String,
+        @Header(COOKIE) cookies : List<String>,
+        @Header(X_REQUESTED_WITH) requested: String = "XMLHttpRequest"
+    ) : Single<PrimaryDocumentResponse>
 }
 

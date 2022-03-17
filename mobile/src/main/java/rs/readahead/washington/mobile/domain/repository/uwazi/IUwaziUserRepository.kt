@@ -30,7 +30,8 @@ interface IUwaziUserRepository {
     fun submitEntity(
         server: UWaziUploadServer,
         entity: RequestBody,
-        attachments: List<MultipartBody.Part?>
+        attachments: List<MultipartBody.Part?>,
+        primaryDocuments : List<MultipartBody.Part?>?
     ): Single<UwaziEntityRow>
 
     fun submitWhiteListedEntity(
@@ -38,4 +39,10 @@ interface IUwaziUserRepository {
         entity: RequestBody,
         attachments: List<MultipartBody.Part?>
     ): Single<UwaziEntityRow>
+
+    fun submitPrimaryDocument(
+        server: UWaziUploadServer,
+        entity: RequestBody,
+        attachments: MultipartBody.Part
+    ): Single<PrimaryDocumentResponse>
 }
