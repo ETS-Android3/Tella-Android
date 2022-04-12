@@ -10,7 +10,9 @@
         android:id="@+id/submittedItem"
         android:layout_width="match_parent"
         app:popupMenuRes="@drawable/ic_more"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:foreground="?android:selectableItemBackground"
+        />
 
     <View
         android:layout_width="match_parent"

@@ -39,7 +39,7 @@
         android:src="@drawable/ic_more"
         android:visibility="gone"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-
+        android:foreground="?android:selectableItemBackground"
         />
 
     <ImageView

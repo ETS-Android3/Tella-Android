@@ -42,7 +42,9 @@
             android:contentDescription="@null"
             android:focusable="true"
             android:padding="10dp"
-            android:src="@drawable/ic_more" />
+            android:src="@drawable/ic_more"
+            android:foreground="?android:selectableItemBackground"
+            />
 
         <TextView
             android:id="@+id/name"

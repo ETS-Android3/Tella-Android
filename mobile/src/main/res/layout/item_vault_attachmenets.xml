@@ -54,6 +54,7 @@
         android:background="@drawable/ic_more"
         android:visibility="gone"
         android:padding="11dp"
+        android:foreground="?android:selectableItemBackground"
         >
     </ImageView>
 

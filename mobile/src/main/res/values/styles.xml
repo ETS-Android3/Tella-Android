@@ -387,6 +387,7 @@
         <item name="android:layout_marginHorizontal">@dimen/tella_main_vertical</item>
         <item name="android:layout_marginBottom">@dimen/tella_main_vertical</item>
         <item name="android:background">@color/dark_orange</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
     </style>
 
     <!-- styles for Forms section -->

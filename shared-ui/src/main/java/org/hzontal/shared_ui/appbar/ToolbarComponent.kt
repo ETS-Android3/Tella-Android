@@ -4,10 +4,12 @@ package org.hzontal.shared_ui.appbar
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
@@ -21,14 +23,14 @@ class ToolbarComponent @JvmOverloads constructor(
 ) :
     Toolbar(context, attrs, defStyleAttr) {
 
-    private lateinit var btnBack: AppCompatImageButton
+    private lateinit var btnBack: ImageButton
     private lateinit var toolbarTextView: TextView
     private lateinit var titleImg: ImageView
     private lateinit var startTitleTv: TextView
     private lateinit var bigStartTitleTv: TextView
     private lateinit var endTitleTv: TextView
-    private lateinit var rightImg : AppCompatImageButton
-    private lateinit var leftImg : AppCompatImageButton
+    private lateinit var rightImg : ImageButton
+    private lateinit var leftImg : ImageButton
     @DrawableRes
     private var arrowBackIcon: Int = -1
     @DrawableRes
@@ -123,7 +125,7 @@ class ToolbarComponent @JvmOverloads constructor(
     }
 
     fun setToolbarNavigationIcon(icon : Int) {
-       btnBack.setBackgroundResource(icon)
+       btnBack.background = getDrawable(context,icon)
     }
 
     fun setRightIcon(icon: Int){
@@ -137,14 +139,14 @@ class ToolbarComponent @JvmOverloads constructor(
 
     private fun bindView() {
         if (arrowBackIcon != -1) {
-            btnBack.setBackgroundResource(arrowBackIcon)
+            btnBack.background = getDrawable(context,arrowBackIcon)
             btnBack.isVisible = true
         }
         if (toolbarTitle != -1){
             toolbarTextView.text = context.getString(toolbarTitle)
             toolbarTextView.isVisible = true
         }
-        if (titleIcon != -1) titleImg.setBackgroundResource(titleIcon)
+        if (titleIcon != -1) titleImg.background = getDrawable(context,titleIcon)
         if (startTitle != -1) {
             startTitleTv.text = context.getString(startTitle)
             startTitleTv.isVisible = true
@@ -158,11 +160,11 @@ class ToolbarComponent @JvmOverloads constructor(
             endTitleTv.isVisible = true
         }
         if (rightIcon != -1){
-            rightImg.setBackgroundResource(rightIcon)
+            rightImg.background = getDrawable(context,rightIcon)
             rightImg.isVisible = true
         }
         if (leftIcon != -1){
-            leftImg.setBackgroundResource(leftIcon)
+            leftImg.background  = getDrawable(context,leftIcon)
             leftImg.isVisible = true
         }
 
